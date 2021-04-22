@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { useContext } from 'react';
+import { PlayerContext } from '../contexts/PlayerContext';
 
 import { api } from '../services/api';
 import { converDurationToTimeString } from '../utils/convertDurationToTimeString';
@@ -26,15 +28,17 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const player = useContext(PlayerContext);
+
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos { player }</h2>
         <ul>
           {latestEpisodes.map(episode => {
             return (
               <li key={episode.id}>
-                <Image 
+                <Image
                   width={192}
                   height={192}
                   src={episode.thumbnail}
