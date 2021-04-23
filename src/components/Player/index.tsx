@@ -49,6 +49,11 @@ export function Player() {
    });
   }
 
+  function handleSeek(amount: number) {
+    audioRef.current.currentTime = amount;
+    setProgress(amount);
+  }
+
   const episode = episodeList[currentEpisodeIndex];
 
   return (
@@ -83,6 +88,7 @@ export function Player() {
               <Slider
                 max={episode.duration}
                 value={progress}
+                onChange={handleSeek}
                 trackStyle={{ backgroundColor: '#04D361' }}
                 railStyle={{ backgroundColor: '#9F75FF' }}
                 handleStyle={{ borderColor: '#04D361', borderWidth: 4 }}
